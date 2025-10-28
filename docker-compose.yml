@@ -1,0 +1,43 @@
+version: '3.8'
+services:
+  auth-service:
+    build: ./backend/auth-service
+    env_file:
+      - ./backend/auth-service/.env.example
+    ports:
+      - "4001:4001"
+    depends_on: []
+
+  timesheet-service:
+    build: ./backend/timesheet-service
+    env_file:
+      - ./backend/timesheet-service/.env.example
+    ports:
+      - "4002:4002"
+    depends_on: []
+
+  expense-service:
+    build: ./backend/expense-service
+    env_file:
+      - ./backend/expense-service/.env.example
+    ports:
+      - "4003:4003"
+    depends_on: []
+
+  document-service:
+    build: ./backend/document-service
+    env_file:
+      - ./backend/document-service/.env.example
+    ports:
+      - "4004:4004"
+    depends_on: []
+
+  report-service:
+    build: ./backend/report-service
+    env_file:
+      - ./backend/report-service/.env.example
+    ports:
+      - "4005:4005"
+    depends_on: []
+
+# Postgres is external, so not included here. All services use DATABASE_URL from .env.example.
