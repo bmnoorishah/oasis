@@ -2,7 +2,7 @@ services:
   - type: web
     name: oasis-frontend
     env: static
-    buildCommand: cd frontend && flutter build web
+    buildCommand: ""
     staticPublishPath: frontend/build/web
     repo: https://github.com/bmnoorishah/oasis.git
     branch: main
