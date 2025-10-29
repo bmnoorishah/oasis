@@ -1,6 +1,8 @@
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 const app = express();
+app.use(cors());
 app.use(express.json());
 require('./swagger')(app);
 app.get('/health', (req, res) => res.json({status: 'ok', service: 'user-service'}));

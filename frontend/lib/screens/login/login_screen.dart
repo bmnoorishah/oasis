@@ -24,11 +24,11 @@ class _LoginScreenState extends State<LoginScreen> {
         role = 'employee';
       }
       if (role != null) {
-        Navigator.pushReplacementNamed(
-          context,
-          '/dashboard',
-          arguments: role,
-        );
+        if (role == 'admin') {
+          Navigator.pushReplacementNamed(context, '/admin-dashboard');
+        } else {
+          Navigator.pushReplacementNamed(context, '/dashboard', arguments: role);
+        }
       } else {
         setState(() {
           _error = 'Invalid credentials';
