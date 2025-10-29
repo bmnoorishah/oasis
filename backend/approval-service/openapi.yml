@@ -1,0 +1,32 @@
+openapi: 3.0.0
+info:
+  title: Approval Service API
+  version: 1.0.0
+servers:
+  - url: http://localhost:4103
+paths:
+  /approval:
+    post:
+      summary: Approve or reject timesheet
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApprovalRequest'
+      responses:
+        '200':
+          description: Approval processed
+components:
+  schemas:
+    ApprovalRequest:
+      type: object
+      properties:
+        timesheetId:
+          type: string
+        approved:
+          type: boolean
+        approverId:
+          type: string
+        comments:
+          type: string

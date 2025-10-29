@@ -1,0 +1,52 @@
+openapi: 3.0.0
+info:
+  title: Expense Service API
+  version: 1.0.0
+servers:
+  - url: http://localhost:4109
+paths:
+  /expenses:
+    get:
+      summary: Get all expenses
+      responses:
+        '200':
+          description: List of expenses
+    post:
+      summary: Submit an expense
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Expense'
+      responses:
+        '201':
+          description: Expense submitted
+  /expenses/{id}:
+    get:
+      summary: Get expense by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Expense details
+components:
+  schemas:
+    Expense:
+      type: object
+      properties:
+        id:
+          type: string
+        userId:
+          type: string
+        amount:
+          type: number
+        description:
+          type: string
+        date:
+          type: string
+          format: date

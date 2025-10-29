@@ -1,0 +1,49 @@
+openapi: 3.0.0
+info:
+  title: Notification Service API
+  version: 1.0.0
+servers:
+  - url: http://localhost:4106
+paths:
+  /notifications:
+    get:
+      summary: Get all notifications
+      responses:
+        '200':
+          description: List of notifications
+    post:
+      summary: Send a notification
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Notification'
+      responses:
+        '201':
+          description: Notification sent
+  /notifications/{id}:
+    get:
+      summary: Get notification by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Notification details
+components:
+  schemas:
+    Notification:
+      type: object
+      properties:
+        id:
+          type: string
+        message:
+          type: string
+        userId:
+          type: string
+        read:
+          type: boolean

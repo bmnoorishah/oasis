@@ -1,0 +1,47 @@
+openapi: 3.0.0
+info:
+  title: Location Service API
+  version: 1.0.0
+servers:
+  - url: http://localhost:4105
+paths:
+  /locations:
+    get:
+      summary: Get all locations
+      responses:
+        '200':
+          description: List of locations
+    post:
+      summary: Add a new location
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Location'
+      responses:
+        '201':
+          description: Location added
+  /locations/{id}:
+    get:
+      summary: Get location by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Location details
+components:
+  schemas:
+    Location:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        address:
+          type: string

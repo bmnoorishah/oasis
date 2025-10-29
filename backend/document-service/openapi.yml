@@ -1,0 +1,46 @@
+openapi: 3.0.0
+info:
+  title: Document Service API
+  version: 1.0.0
+servers:
+  - url: http://localhost:4108
+paths:
+  /documents:
+    get:
+      summary: Get all documents
+      responses:
+        '200':
+          description: List of documents
+    post:
+      summary: Upload a document
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DocumentUpload'
+      responses:
+        '201':
+          description: Document uploaded
+  /documents/{id}:
+    get:
+      summary: Get document by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Document details
+components:
+  schemas:
+    DocumentUpload:
+      type: object
+      properties:
+        file:
+          type: string
+          format: binary
+        userId:
+          type: string

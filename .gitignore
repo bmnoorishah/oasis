@@ -5,7 +5,7 @@ node_modules/
 
 # Flutter
 frontend/.dart_tool/
-frontend/build/
+# frontend/build/  <-- removed so build output is tracked
 frontend/.idea/
 frontend/.vscode/
 frontend/.packages

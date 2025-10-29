@@ -1,0 +1,50 @@
+openapi: 3.0.0
+info:
+  title: Audit Service API
+  version: 1.0.0
+servers:
+  - url: http://localhost:4107
+paths:
+  /audits:
+    get:
+      summary: Get all audit logs
+      responses:
+        '200':
+          description: List of audit logs
+    post:
+      summary: Create an audit log
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuditLog'
+      responses:
+        '201':
+          description: Audit log created
+  /audits/{id}:
+    get:
+      summary: Get audit log by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Audit log details
+components:
+  schemas:
+    AuditLog:
+      type: object
+      properties:
+        id:
+          type: string
+        action:
+          type: string
+        userId:
+          type: string
+        timestamp:
+          type: string
+          format: date-time

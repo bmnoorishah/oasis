@@ -1,0 +1,39 @@
+openapi: 3.0.0
+info:
+  title: Timesheet Service API
+  version: 1.0.0
+servers:
+  - url: http://localhost:4002
+paths:
+  /timesheet:
+    get:
+      summary: Get timesheet entries
+      responses:
+        '200':
+          description: List of timesheet entries
+    post:
+      summary: Submit timesheet entry/exit
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TimesheetEntry'
+      responses:
+        '200':
+          description: Timesheet submitted
+components:
+  schemas:
+    TimesheetEntry:
+      type: object
+      properties:
+        userId:
+          type: string
+        action:
+          type: string
+          enum: [entry, exit]
+        timestamp:
+          type: string
+          format: date-time
+        device:
+          type: string
