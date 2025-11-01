@@ -15,6 +15,9 @@ echo "Restarting auth-service..."
 echo "Restarting user-service..."
 (cd backend/user-service && npm install && npm start) &
 
+echo "Restarting expense-service..."
+(cd backend/expense-service && npm install && npm start) &
+
 echo "Restarting timesheet-service..."
 (cd backend/timesheet-service && npm install && npm start) &
 

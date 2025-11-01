@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../common/common_navigation_bar.dart';
 import '../services/user/user_service.dart';
 import '../models/user/user.dart';
+import 'expense/admin_expense_screen.dart';
 
 class AdminDashboardScreen extends StatefulWidget {
   const AdminDashboardScreen({Key? key}) : super(key: key);
@@ -153,14 +154,41 @@ class _ResizableSidebarState extends State<_ResizableSidebar> {
   }
 
   Widget _buildMainContent(int selectedIndex) {
-    if (selectedIndex == 0) {
-      return UserGrid();
+    switch (selectedIndex) {
+      case 0:
+        return UserGrid();
+      case 1:
+        return const AdminExpenseScreen();
+      case 2:
+        return _buildPlaceholderScreen('Timesheets', Icons.access_time);
+      case 3:
+        return _buildPlaceholderScreen('Documents', Icons.description);
+      case 4:
+        return _buildPlaceholderScreen('Reports', Icons.bar_chart);
+      case 5:
+        return _buildPlaceholderScreen('Activity', Icons.history);
+      default:
+        return _buildPlaceholderScreen('Select Item', Icons.info);
     }
-    // ...other screens can be added here
+  }
+
+  Widget _buildPlaceholderScreen(String title, IconData icon) {
     return Center(
-      child: Text(
-        'Select an item from the toolbar to view actions/details.',
-        style: TextStyle(fontSize: 20, color: Colors.grey.shade600),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(icon, size: 64, color: Colors.grey.shade400),
+          const SizedBox(height: 16),
+          Text(
+            title,
+            style: TextStyle(fontSize: 24, color: Colors.grey.shade600),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'This section is under development',
+            style: TextStyle(fontSize: 16, color: Colors.grey.shade500),
+          ),
+        ],
       ),
     );
   }

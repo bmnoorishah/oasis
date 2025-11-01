@@ -3,37 +3,65 @@ info:
   title: Expense Service API
   version: 1.0.0
 servers:
-  - url: http://localhost:4109
+  - url: http://localhost:4003
 paths:
-  /expenses:
+  /health:
     get:
-      summary: Get all expenses
+      summary: Health check endpoint
       responses:
         '200':
-          description: List of expenses
+          description: Service status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  service:
+                    type: string
+  /expense:
     post:
       summary: Submit an expense
       requestBody:
         required: true
         content:
-          application/json:
+          multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Expense'
-      responses:
-        '201':
-          description: Expense submitted
-  /expenses/{id}:
-    get:
-      summary: Get expense by ID
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
+              type: object
+              properties:
+                userId:
+                  type: string
+                  description: ID of the user submitting the expense
+                amount:
+                  type: number
+                  description: Amount of the expense
+                date:
+                  type: string
+                  format: date
+                  description: Date of the expense
+                description:
+                  type: string
+                  description: Description of the expense
+                receipt:
+                  type: string
+                  format: binary
+                  description: Receipt file upload
+              required:
+                - userId
+                - amount
+                - date
+                - description
       responses:
         '200':
-          description: Expense details
+          description: Expense submitted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
 components:
   schemas:
     Expense:
@@ -50,3 +78,6 @@ components:
         date:
           type: string
           format: date
+        receipt:
+          type: string
+          description: Path to uploaded receipt file

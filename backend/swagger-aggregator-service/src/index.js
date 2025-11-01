@@ -9,6 +9,7 @@ app.use(express.json());
 const services = [
   { name: 'User Service', url: 'http://localhost:4101/swagger.json' },
   { name: 'Timesheet Service', url: 'http://localhost:4002/swagger.json' },
+  { name: 'Expense Service', url: 'http://localhost:4003/swagger.json' },
   { name: 'Approval Service', url: 'http://localhost:4103/swagger.json' },
   { name: 'Device Service', url: 'http://localhost:4104/swagger.json' },
   { name: 'Location Service', url: 'http://localhost:4105/swagger.json' },
